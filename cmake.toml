@@ -1,0 +1,22 @@
+[cmake]
+version = "3.31"
+cmkr-include = "cmkr.cmake"
+
+[project]
+name = "cpp-template"
+description = "A simple template for cross-platform apps in C++"
+languages = ["C", "CXX"]
+
+[variables]
+CMAKE_EXPORT_COMPILE_COMMANDS = true
+
+[target.template]
+type = "executable" 
+sources = [
+    "src/**.cpp",
+]
+include-directories = [
+    "src",
+]
+compile-features = ["cxx_std_23"]
+precompile-headers = ["src/pch.hpp"]
