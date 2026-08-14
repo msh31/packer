@@ -7,6 +7,7 @@
 #ifdef __cplusplus
     #include <filesystem>
     #include <print>
+    #include <vector>
 
 // convience
 namespace fs = std::filesystem;
