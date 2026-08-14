@@ -35,75 +35,30 @@ project(cpp-template
 		"A simple template for cross-platform apps in C++"
 )
 
-# Packages
-find_package(spdlog REQUIRED)
-
-find_package(GTest REQUIRED)
-
-# Target: template
-set(template_SOURCES
+# Target: mvcp
+set(mvcp_SOURCES
 	cmake.toml
 	"src/main.cpp"
 )
 
-add_executable(template)
+add_executable(mvcp)
 
-target_sources(template PRIVATE ${template_SOURCES})
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${template_SOURCES})
+target_sources(mvcp PRIVATE ${mvcp_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${mvcp_SOURCES})
 
-target_compile_features(template PRIVATE
+target_compile_features(mvcp PRIVATE
 	cxx_std_23
 )
 
-target_include_directories(template PRIVATE
+target_include_directories(mvcp PRIVATE
 	src
 )
 
-target_link_libraries(template PRIVATE
-	spdlog::spdlog
-)
-
-target_precompile_headers(template PRIVATE
+target_precompile_headers(mvcp PRIVATE
 	"src/pch.hpp"
 )
 
 get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)
 if(NOT CMKR_VS_STARTUP_PROJECT)
-	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT template)
+	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT mvcp)
 endif()
-
-# Target: template_tests
-set(template_tests_SOURCES
-	cmake.toml
-	"tests/main.cpp"
-)
-
-add_executable(template_tests)
-
-target_sources(template_tests PRIVATE ${template_tests_SOURCES})
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${template_tests_SOURCES})
-
-target_compile_features(template_tests PRIVATE
-	cxx_std_23
-)
-
-target_include_directories(template_tests PRIVATE
-	src
-)
-
-target_link_libraries(template_tests PRIVATE
-	GTest::gtest_main
-)
-
-target_precompile_headers(template_tests PRIVATE
-	"src/pch.hpp"
-)
-
-get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)
-if(NOT CMKR_VS_STARTUP_PROJECT)
-	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT template_tests)
-endif()
-
-set(CMKR_TARGET template_tests)
-enable_testing()
-add_test(NAME template_tests COMMAND template_tests)

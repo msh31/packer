@@ -5,7 +5,6 @@
 
 #pragma once
 #ifdef __cplusplus
-    #include <deque>
     #include <filesystem>
     #include <print>
 

@@ -10,7 +10,7 @@ languages = ["C", "CXX"]
 [variables]
 CMAKE_EXPORT_COMPILE_COMMANDS = true
 
-[target.template]
+[target.mvcp]
 type = "executable" 
 sources = [
     "src/**.cpp",
